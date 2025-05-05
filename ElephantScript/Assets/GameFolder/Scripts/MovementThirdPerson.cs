@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementThirdPerson : MonoBehaviour
 {
     
-    [SerializeField] private float speed = 4f;
+    public float speed = 4f;
     [SerializeField] private float rotateSpeed = 4f;
     Rigidbody rb;
 
