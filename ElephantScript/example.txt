@@ -1,0 +1,4 @@
+"while True:\n\tping(ALIVE)\n\t" => ["whi", "le ", "True"]
+def example():
+    str += array[part]
+    part += 1
