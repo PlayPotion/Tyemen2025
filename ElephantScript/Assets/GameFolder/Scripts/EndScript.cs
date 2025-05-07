@@ -20,6 +20,8 @@ public class EndScript : MonoBehaviour
     float timer;
     GameObject image1;
     GameObject image2;
+    public AudioSource good;
+    public AudioSource bad;
 
 
     void Start()
@@ -32,11 +34,13 @@ public class EndScript : MonoBehaviour
                 image1 = GoodImage1;
                 image2 = GoodImage2;
                 ResultText.text = $"Количество багов: {bugsCount}\nПолучена хорошая концовка";
+                good.Play();
                 break;
             case 2:
                 image1 = BadImage1;
                 image2 = BadImage2;
                 ResultText.text = $"Количество багов: {bugsCount}\nПолучена плохая концовка";
+                bad.Play();
                 break;
         }
 
