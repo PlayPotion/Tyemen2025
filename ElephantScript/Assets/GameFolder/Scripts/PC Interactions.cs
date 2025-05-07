@@ -28,6 +28,21 @@ public class PCInteractions : MonoBehaviour
     public GameObject TapE;
     public GameObject TapQ;
     public GameObject TapR;
+    public GameObject laptopSounds;
+    [Header("Mysor")]
+    public GameObject box1;
+    public GameObject box2;
+    public GameObject delete1;
+    public GameObject delete2;
+    public GameObject delete3;
+    public GameObject delete4;
+    public GameObject delete5;
+    public GameObject delete6;
+    public GameObject clean1;
+    public GameObject clean2;
+    public GameObject stellage;
+    public GameObject effect;
+
 
     bool inTrigger;
     bool CanvasOpen;
@@ -126,7 +141,15 @@ public class PCInteractions : MonoBehaviour
             player.transform.eulerAngles = new Vector3(transform.rotation.x, 87, transform.rotation.z);
             anim.SetBool("isPrinting", true);
             anim.SetBool("isWalk", false);
+            laptopSounds.SetActive(true);
+
             LaptopHUD.SetActive(true);
+
+            if (Quests.Quest is "Решить задание на компьютере [1]" or "Решить задание на компьютере [2]"
+            or "Решить задание на компьютере [3]") StartCodingButton.SetActive(true);
+
+            
+
         }
         else if (CanvasOpen && Input.GetKeyDown(KeyCode.Escape) && !QTEOpen)
         {
@@ -134,6 +157,7 @@ public class PCInteractions : MonoBehaviour
             _move3rd.enabled = true;
             CanvasOpen = false;
             anim.SetBool("isPrinting", false);
+            laptopSounds.SetActive(false);
             LaptopHUD.SetActive(false);
         }
     }
@@ -215,13 +239,34 @@ public class PCInteractions : MonoBehaviour
     {
         if (level != 3)
         {
+            if (level == 1)
+            {
+                Quests.Quest = "Распаковать кресло, стол и растение";
+                box1.SetActive(true);
+                box2.SetActive(true);
+
+            } else if (level == 2)
+            {
+                Quests.Quest = "Убраться на складе";
+                delete1.SetActive(false);
+                delete2.SetActive(false);
+                delete3.SetActive(false);
+                delete4.SetActive(false);
+                delete5.SetActive(false);
+                delete6.SetActive(false);
+                clean1.SetActive(true);
+                clean2.SetActive(true);
+                stellage.SetActive(true);
+                effect.SetActive(false);
+            }
+                
             QTEOpen = false;
             level++;
             QTE.SetActive(false);
             TapE.SetActive(false);
             TapQ.SetActive(false);
             TapR.SetActive(false);
-            StartCodingButton.SetActive(true);
+            StartCodingButton.SetActive(false);
             Hint.SetActive(true);
 
             currentKey = QTEKey.None;
@@ -230,6 +275,7 @@ public class PCInteractions : MonoBehaviour
             pressCount = 0;
             completeCount = 0;
             currentLineIndex = 0;
+
         } else {
             CanvasOpen = false;
             QTEOpen = false;
