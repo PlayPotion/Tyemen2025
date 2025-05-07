@@ -15,6 +15,9 @@ public class PCInteractions : MonoBehaviour
     public AudioSource wrong;
 
     [Header("HUD")]
+    public UnityEngine.UI.Image QTEProgressImageE;
+    public UnityEngine.UI.Image QTEProgressImageQ;
+    public UnityEngine.UI.Image QTEProgressImageR;
     public TextMeshProUGUI CodeText;
     public GameObject EndButton;
     public TextMeshProUGUI BugCount_gui;
@@ -43,7 +46,8 @@ public class PCInteractions : MonoBehaviour
     public GameObject stellage;
     public GameObject effect;
 
-
+    int targetPresses;
+    float maxTime;
     bool inTrigger;
     bool CanvasOpen;
     bool QTEOpen;
@@ -119,6 +123,12 @@ public class PCInteractions : MonoBehaviour
         if (QTEOpen)
         {
             HandleQTE();
+
+            float timeLeft = Mathf.Clamp(maxTime - timer, 0f, maxTime);
+            QTEProgressImageQ.fillAmount = timeLeft / maxTime;
+            QTEProgressImageE.fillAmount = timeLeft / maxTime;
+            QTEProgressImageR.fillAmount = timeLeft / maxTime;
+
         }
 
         BugCount_gui.text = $"Количество багов: {bugCount}";
@@ -148,8 +158,6 @@ public class PCInteractions : MonoBehaviour
             if (Quests.Quest is "Решить задание на компьютере [1]" or "Решить задание на компьютере [2]"
             or "Решить задание на компьютере [3]") StartCodingButton.SetActive(true);
 
-            
-
         }
         else if (CanvasOpen && Input.GetKeyDown(KeyCode.Escape) && !QTEOpen)
         {
@@ -172,6 +180,9 @@ public class PCInteractions : MonoBehaviour
         StartCodingButton.SetActive(false);
         timer = 0;
         pressCount = 0;
+        QTEProgressImageQ.fillAmount = 1f;
+        QTEProgressImageE.fillAmount = 1f;
+        QTEProgressImageR.fillAmount = 1f;
         completeCount = 0;
         currentLineIndex = 0;
         NextQTEKey();
@@ -203,8 +214,8 @@ public class PCInteractions : MonoBehaviour
             AddCodeChunk();
         }
 
-        int targetPresses = 10;
-        float maxTime = 5f;
+        targetPresses = 10;
+        maxTime = 5f;
 
         switch (level)
         {
@@ -216,7 +227,11 @@ public class PCInteractions : MonoBehaviour
         {
             completeCount++;
             pressCount = 0;
+            QTEProgressImageQ.fillAmount = 1f;
+            QTEProgressImageE.fillAmount = 1f;
+            QTEProgressImageR.fillAmount = 1f;
             timer = 0;
+            correct.Play();
 
             if (completeCount >= quota)
             {
@@ -230,7 +245,11 @@ public class PCInteractions : MonoBehaviour
         {
             bugCount++;
             pressCount = 0;
+            QTEProgressImageQ.fillAmount = 1f;
+            QTEProgressImageE.fillAmount = 1f;
+            QTEProgressImageR.fillAmount = 1f;
             timer = 0;
+            wrong.Play();
             NextQTEKey();
         }
     }
@@ -273,6 +292,9 @@ public class PCInteractions : MonoBehaviour
             lastKey = QTEKey.None;
             timer = 0;
             pressCount = 0;
+            QTEProgressImageQ.fillAmount = 1f;
+            QTEProgressImageE.fillAmount = 1f;
+            QTEProgressImageR.fillAmount = 1f;
             completeCount = 0;
             currentLineIndex = 0;
 
@@ -292,6 +314,9 @@ public class PCInteractions : MonoBehaviour
             lastKey = QTEKey.None;
             timer = 0;
             pressCount = 0;
+            QTEProgressImageQ.fillAmount = 1f;
+            QTEProgressImageE.fillAmount = 1f;
+            QTEProgressImageR.fillAmount = 1f;  
             completeCount = 0;
             currentLineIndex = 0;
         }
