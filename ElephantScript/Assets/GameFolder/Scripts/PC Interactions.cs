@@ -4,13 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class PCInteractions : MonoBehaviour
 {
+
+    MovementThirdPerson _move3rd;
+    Animator anim;
     public int quota = 3;
 
     [Header("Player")]
     public GameObject player;
     public AudioSource correct;
     public AudioSource wrong;
-    MovementThirdPerson _move3rd;
 
     [Header("HUD")]
     public TextMeshProUGUI CodeText;
@@ -69,6 +71,7 @@ public class PCInteractions : MonoBehaviour
     void Start()
     {
         _move3rd = player.GetComponent<MovementThirdPerson>();
+        anim = player.GetComponent<Animator>();
         PrepareCodeChunks();
     }
 
@@ -120,6 +123,9 @@ public class PCInteractions : MonoBehaviour
             Hint_gui.text = "Нажмите [Esc], чтобы закрыть ноутбук";
             _move3rd.enabled = false;
             CanvasOpen = true;
+            player.transform.eulerAngles = new Vector3(transform.rotation.x, 87, transform.rotation.z);
+            anim.SetBool("isPrinting", true);
+            anim.SetBool("isWalk", false);
             LaptopHUD.SetActive(true);
         }
         else if (CanvasOpen && Input.GetKeyDown(KeyCode.Escape) && !QTEOpen)
@@ -127,6 +133,7 @@ public class PCInteractions : MonoBehaviour
             Hint_gui.text = "Нажмите [Е], чтобы использовать ноутбук";
             _move3rd.enabled = true;
             CanvasOpen = false;
+            anim.SetBool("isPrinting", false);
             LaptopHUD.SetActive(false);
         }
     }
@@ -148,6 +155,8 @@ public class PCInteractions : MonoBehaviour
 
     void HandleQTE()
     {
+
+
         timer += Time.deltaTime;
 
         TapE.SetActive(currentKey == QTEKey.E);
