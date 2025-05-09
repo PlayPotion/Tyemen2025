@@ -13,6 +13,7 @@ public class EndScript : MonoBehaviour
     public GameObject BadImage1;
     public GameObject BadImage2;
     public GameObject The_End_With_Result;
+    public GameObject leave_button;
 
     [Header("GameObjects")]
     public TextMeshProUGUI ResultText;
@@ -62,9 +63,14 @@ public class EndScript : MonoBehaviour
                 break;
             case 2:
                 image2.SetActive(false);
+                leave_button.SetActive(true);
                 The_End_With_Result.SetActive(true);
                 break;
         }
+    }
+
+    public void ExitFromGame() {
+        Application.Quit();
     }
 
 

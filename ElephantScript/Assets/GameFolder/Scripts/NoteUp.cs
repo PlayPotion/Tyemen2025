@@ -5,8 +5,8 @@ using UnityEngine;
 public class NoteUp : MonoBehaviour
 {
     public RectTransform noteUI; 
-    public float showY = 2.861e-05f;
-    public float hideY = -1088.61f; 
+    public float showY = 541f;
+    public float hideY = -548f; 
     public float moveSpeed = 2f;
 
     bool movingToShow = false;

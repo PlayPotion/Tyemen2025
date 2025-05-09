@@ -25,6 +25,8 @@ public class CleanNWork : MonoBehaviour
             numbersObject++;
             numbersObject++;
 
+            if (numbersObject >= 2) hintCanvas.SetActive(false);
+
             if (numbersObject >= 4) {
                 Quests.Quest = "Решить задание на компьютере [2]";
                 hintCanvas.SetActive(false);
@@ -40,6 +42,8 @@ public class CleanNWork : MonoBehaviour
             object3.SetActive(false);
             numbersObject++;
             numbersObject++;
+
+            if (numbersObject >= 2) hintCanvas.SetActive(false);
 
             if (numbersObject >= 4) {
                 Quests.Quest = "Решить задание на компьютере [3]";
