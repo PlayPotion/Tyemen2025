@@ -107,6 +107,8 @@ public class PCInteractions : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            anim.SetBool("isPrinting", false);
+            laptopSounds.SetActive(false);
             inTrigger = false;
             Hint.SetActive(false);
             _move3rd.enabled = true;
